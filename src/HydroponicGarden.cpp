@@ -3,16 +3,16 @@
 // Author      : georgip
 // Version     :
 // Copyright   : 
-// Description : Hello World in C++, Ansi-style
+// Description : Hydroponic garden in C++, Ansi-style
 //============================================================================
 
 #include <iostream>
 
-extern int gpioTest ();
+extern int i2cTest ();
 
 int main ()
 {
-    gpioTest ();
+    i2cTest ();
 
     return 0;
 }

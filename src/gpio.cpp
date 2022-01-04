@@ -27,6 +27,12 @@ GPIO::GPIO (uint8_t number) :
 
 GPIO::~GPIO ()
 {
+    unexportGPIO ();
+}
+
+GPIO::GPIO (GPIO &gpio) :
+        m_number (gpio.m_number), m_direction (gpio.m_direction)
+{
 }
 
 int GPIO::setDirection (GPIO_DIRECTION direction)
@@ -69,6 +75,11 @@ GPIO_STATE GPIO::getState ()
 int8_t GPIO::exportGPIO ()
 {
     return write (GPIO_PATH, "export", std::to_string (m_number));
+}
+
+int8_t GPIO::unexportGPIO ()
+{
+    return write (GPIO_PATH, "unexport", std::to_string (m_number));
 }
 
 int8_t GPIO::write (std::string path, std::string file, std::string value)
