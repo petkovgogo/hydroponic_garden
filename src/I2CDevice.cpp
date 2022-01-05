@@ -13,6 +13,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <cstring>
 
 I2CDevice::I2CDevice (uint8_t bus, uint8_t address) :
         m_fd (-1), m_bus (bus), m_address (address)
@@ -53,9 +54,9 @@ uint8_t I2CDevice::close ()
     return 0;
 }
 
-uint8_t I2CDevice::write (uint8_t registerAddress, uint8_t value)
+uint8_t I2CDevice::write (uint8_t regAddress, const uint8_t value)
 {
-    uint8_t buffer[] = { registerAddress, value };
+    uint8_t buffer[] = { regAddress, value };
 
     if (::write (m_fd, buffer, 2) != 2)
     {
@@ -66,9 +67,24 @@ uint8_t I2CDevice::write (uint8_t registerAddress, uint8_t value)
     return 0;
 }
 
-uint8_t I2CDevice::read (uint8_t registerAddress)
+uint8_t I2CDevice::write (uint8_t regAddress, const uint8_t values[],
+                          uint32_t len)
 {
-    uint8_t data[] = { registerAddress };
+    uint8_t buffer[len + 1] = { regAddress };
+    memcpy (buffer + 1, values, len);
+
+    if (::write (m_fd, buffer, len + 1) < static_cast <int> (len))
+    {
+        perror ("I2C: Failed write to the device\n");
+        return 1;
+    }
+
+    return 0;
+}
+
+uint8_t I2CDevice::read (uint8_t regAddress)
+{
+    uint8_t data[] = { regAddress };
 
     if (::read (m_fd, data, 1) != 1)
     {
@@ -77,4 +93,21 @@ uint8_t I2CDevice::read (uint8_t registerAddress)
     }
 
     return *data;
+}
+
+uint8_t I2CDevice::read (uint8_t regAddress, uint8_t outValues[], uint32_t len)
+{
+    if (::write (m_fd, &regAddress, 1) != 1)
+    {
+        perror ("I2C: Failed write to the device\n");
+        return 1;
+    }
+
+    if (::read (m_fd, outValues, len) < static_cast <int> (len))
+    {
+        perror ("I2C: Failed to read in the value.\n");
+        return 1;
+    }
+
+    return 0;
 }

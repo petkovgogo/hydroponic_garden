@@ -16,8 +16,10 @@ public:
     I2CDevice (uint8_t bus, uint8_t address);
     ~I2CDevice ();
 
-    uint8_t write (uint8_t registerAddress, uint8_t value);
-    uint8_t read (uint8_t registerAddress);
+    uint8_t write (uint8_t regAddress, const uint8_t value);
+    uint8_t write (uint8_t regAddress, const uint8_t values[], uint32_t len);
+    uint8_t read (uint8_t regAddress);
+    uint8_t read (uint8_t regAddress, uint8_t outValues[], uint32_t len);
 
 private:
     int m_fd;
