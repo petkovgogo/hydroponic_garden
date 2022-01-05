@@ -10,21 +10,21 @@
 #include <iostream>
 #include <unistd.h>
 
-int gpioTest ()
+int gpioTest()
 {
-    GPIO led (4);
+    GPIO led(4);
 
-    led.setDirection (GPIO_DIRECTION::OUTPUT);
+    led.setDirection(GPIO_DIRECTION::OUTPUT);
 
-    for (int i = 0; i < 10; ++i)
+    for(int i = 0; i < 10; ++i)
     {
-        led.setState (GPIO_STATE::HIGH);
-        std::cout << led.getState () << std::endl;
-        sleep (2);
+        led.setState(GPIO_STATE::HIGH);
+        std::cout << led.getState() << std::endl;
+        sleep(2);
 
-        led.setState (GPIO_STATE::LOW);
-        std::cout << led.getState () << std::endl;
-        sleep (2);
+        led.setState(GPIO_STATE::LOW);
+        std::cout << led.getState() << std::endl;
+        sleep(2);
     }
 
     return 0;

@@ -13,104 +13,104 @@
 
 const std::string GPIO::GPIO_PATH = "/sys/class/gpio/";
 
-GPIO::GPIO (uint8_t number) :
-        m_number (number), m_direction (INPUT)
+GPIO::GPIO(uint8_t number) :
+        m_number(number), m_direction(INPUT)
 {
-    m_path = std::string (
-            GPIO_PATH + "gpio" + std::to_string (static_cast <int> (m_number))
+    m_path = std::string(
+            GPIO_PATH + "gpio" + std::to_string(static_cast <int>(m_number))
                     + "/");
 
-    exportGPIO ();
+    exportGPIO();
 
-    usleep (250000);
+    usleep(250000);
 }
 
-GPIO::~GPIO ()
+GPIO::~GPIO()
 {
-    unexportGPIO ();
+    unexportGPIO();
 }
 
-GPIO::GPIO (GPIO &gpio) :
-        m_number (gpio.m_number), m_direction (gpio.m_direction)
+GPIO::GPIO(GPIO &gpio) :
+        m_number(gpio.m_number), m_direction(gpio.m_direction)
 {
 }
 
-int GPIO::setDirection (GPIO_DIRECTION direction)
+int GPIO::setDirection(GPIO_DIRECTION direction)
 {
-    if (direction)
+    if(direction)
     {
-        return write (m_path, "direction", "out");
+        return write(m_path, "direction", "out");
     }
 
-    return write (m_path, "direction", "in");
+    return write(m_path, "direction", "in");
 
 }
 
-int GPIO::setState (GPIO_STATE state)
+int GPIO::setState(GPIO_STATE state)
 {
-    return write (m_path, "value", std::to_string (state));
+    return write(m_path, "value", std::to_string(state));
 }
 
-GPIO_STATE GPIO::getState ()
+GPIO_STATE GPIO::getState()
 {
-    std::string result = read (m_path, "value");
+    std::string result = read(m_path, "value");
 
-    if (result == "0")
+    if(result == "0")
     {
         return GPIO_STATE::LOW;
     }
 
-    if (result == "1")
+    if(result == "1")
     {
         return GPIO_STATE::HIGH;
     }
 
     std::cerr << "GPIO: There was a problem reading GPIO"
-              << static_cast <int> (m_number)
+              << static_cast <int>(m_number)
               << std::endl;
 
     return GPIO_STATE::UNDEF;
 }
 
-int8_t GPIO::exportGPIO ()
+int8_t GPIO::exportGPIO()
 {
-    return write (GPIO_PATH, "export", std::to_string (m_number));
+    return write(GPIO_PATH, "export", std::to_string(m_number));
 }
 
-int8_t GPIO::unexportGPIO ()
+int8_t GPIO::unexportGPIO()
 {
-    return write (GPIO_PATH, "unexport", std::to_string (m_number));
+    return write(GPIO_PATH, "unexport", std::to_string(m_number));
 }
 
-int8_t GPIO::write (std::string path, std::string file, std::string value)
+int8_t GPIO::write(std::string path, std::string file, std::string value)
 {
-    std::ofstream target (path + file);
+    std::ofstream target(path + file);
 
-    if (!target.is_open ())
+    if(!target.is_open())
     {
         std::cerr << "GPIO: failed to open file " << std::endl;
         return -1;
     }
 
     target << value;
-    target.close ();
+    target.close();
 
     return 0;
 }
 
-std::string GPIO::read (std::string path, std::string file)
+std::string GPIO::read(std::string path, std::string file)
 {
-    std::ifstream target (path + file);
+    std::ifstream target(path + file);
 
-    if (!target.is_open ())
+    if(!target.is_open())
     {
         std::cerr << "GPIO: failed to open file " << std::endl;
         return "\0";
     }
 
     std::string value;
-    getline (target, value);
-    target.close ();
+    getline(target, value);
+    target.close();
 
     return value;
 }

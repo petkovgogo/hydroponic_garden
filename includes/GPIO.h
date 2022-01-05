@@ -18,13 +18,13 @@ class GPIO
 public:
     static const std::string GPIO_PATH;
 
-    GPIO (uint8_t gpio);
-    GPIO (GPIO &);
-    ~GPIO ();
+    GPIO(uint8_t gpio);
+    GPIO(GPIO&);
+    ~GPIO();
 
-    int setDirection (GPIO_DIRECTION);
-    int setState (GPIO_STATE);
-    GPIO_STATE getState ();
+    int setDirection(GPIO_DIRECTION);
+    int setState(GPIO_STATE);
+    GPIO_STATE getState();
 
 private:
 
@@ -32,10 +32,10 @@ private:
     uint8_t m_number;
     GPIO_DIRECTION m_direction;
 
-    int8_t exportGPIO ();
-    int8_t unexportGPIO ();
-    int8_t write (std::string path, std::string file, std::string value);
-    std::string read (std::string path, std::string file);
+    int8_t exportGPIO();
+    int8_t unexportGPIO();
+    int8_t write(std::string path, std::string file, std::string value);
+    std::string read(std::string path, std::string file);
 };
 
 #endif /* GPIO_H_ */

@@ -8,11 +8,11 @@
 
 #include <iostream>
 
-extern int i2cTest ();
+extern int i2cTest();
 
-int main ()
+int main()
 {
-    i2cTest ();
+    i2cTest();
 
     return 0;
 }
