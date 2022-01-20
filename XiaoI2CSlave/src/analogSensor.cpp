@@ -1,4 +1,4 @@
-#include "TDSSensor.h"
+#include "AnalogSensor.h"
 
 #include <Arduino.h>
 #include <cstring>

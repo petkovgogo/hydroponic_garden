@@ -6,6 +6,7 @@
 namespace CompensationFuncs
 {
     float compensateTDSData(uint16_t rawValue);
+    float compensatePHData(uint16_t rawValue);
 } // namespace CompensationFuncs
 
 
