@@ -8,11 +8,11 @@
 
 #include <iostream>
 
-extern int bme280Test();
+extern int relayTest();
 
 int main()
 {
-    bme280Test();
+    relayTest();
 
     return 0;
 }
