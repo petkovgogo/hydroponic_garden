@@ -27,6 +27,10 @@ int gpioTest()
         sleep(2);
     }
 
+    led.toggleState();
+    sleep(5);
+    led.toggleState();
+
     return 0;
 }
 

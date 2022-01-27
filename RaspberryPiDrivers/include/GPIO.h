@@ -24,6 +24,7 @@ public:
 
     int setDirection(GPIO_DIRECTION);
     int setState(GPIO_STATE);
+    int toggleState();
     GPIO_STATE getState();
 
 private:
