@@ -1,0 +1,52 @@
+@startuml HydroponicArchitecture
+
+!include <tupadr3/common>
+!define OFFICE_ICONS https://raw.githubusercontent.com/Roemer/plantuml-office/master/office2014
+!includeurl OFFICE_ICONS/Servers/web_server.puml
+!includeurl OFFICE_ICONS/Devices/nic.puml
+!includeurl OFFICE_ICONS/Concepts/service_application.puml
+!includeurl OFFICE_ICONS/Databases/database_mini_2_blue.puml
+!includeurl OFFICE_ICONS/Databases/monitoring_store.puml
+!includeurl OFFICE_ICONS/Servers/application_server.puml
+!includeurl OFFICE_ICONS/Devices/cell_phone_generic.puml
+!includeurl OFFICE_ICONS/Devices/workstation.puml 
+
+skinparam defaultTextAlignment center
+
+frame "RaspberryPi" \
+{
+    OFF_WEB_SERVER(NginX, "[ NginX ]\n**gmalinka.local**\nCGI scripts")
+    OFF_NIC(Xiao, "[ Xiao ]\n**I2C**\nADC + compensation")
+    OFF_SERVICE_APPLICATION(BME280, "[ BME280 ]\n**I2C**\nT + H + P sensor")
+    OFF_SERVICE_APPLICATION(Relay, "[ Relay ]\n**GPIO**")
+}
+
+frame "Server" \
+{
+    frame "Database" \
+    {
+        OFF_DATABASE_MINI_2_BLUE(PostgreSQL, "[ PostgreSQL ]\n**docker**", Database, Blue)
+        OFF_MONITORING_STORE(InfluxDB, "[ InfluxDB ]\n**docker**", Database)
+    }
+
+    OFF_APPLICATION_SERVER(WebAPI, "[ ASP.NET WebAPI ]\n**georgi-81ax.local**\nHydroponic API")
+    OFF_SERVICE_APPLICATION(SensorDataGatherer, "[ .NET Hosted service ]\n**docker**\nSensor data gatherer")
+}
+
+frame "Client" \
+{
+    OFF_CELL_PHONE_GENERIC(AndroidClient, "[ Android ]\n**Dynamic IP**\nPhone client")
+    OFF_WORKSTATION(PCClient, "[ Any OS ]\n**Dynamic IP**\nPC client")
+}
+
+NginX <--> Xiao
+NginX <--> BME280
+NginX <--> Relay
+SensorDataGatherer <--> NginX
+SensorDataGatherer --> InfluxDB
+WebAPI <-- InfluxDB
+WebAPI <--> PostgreSQL
+WebAPI <--> AndroidClient
+WebAPI <--> PCClient
+
+@enduml
