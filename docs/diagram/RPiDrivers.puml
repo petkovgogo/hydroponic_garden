@@ -1,0 +1,127 @@
+@startuml RPIDrivers
+
+enum GPIO_DIRECTION
+enum GPIO_STATE
+
+class GPIO
+class I2CDevice
+class Relay
+class BME280
+
+GPIO <|-- GPIO_DIRECTION
+GPIO <|-- GPIO_STATE
+I2CDevice *-- GPIO
+Relay *-- GPIO
+BME280 *-- I2CDevice
+
+enum GPIO_DIRECTION
+{
+    INPUT = 0
+    OUTPUT = 1
+}
+
+enum GPIO_STATE 
+{
+    LOW = 0
+    HIGH = 1
+    UNDEF = 2 
+}
+
+class GPIO
+{
+    + {static} const std::string GPIO_PATH
+
+    + GPIO(uint8_t gpio)
+    + GPIO(GPIO&)
+    + \~GPIO()
+
+    + int setDirection(GPIO_DIRECTION)
+    + int setState(GPIO_STATE)
+    + int toggleState()
+    + GPIO_STATE getState()
+
+..
+    - std::string m_path
+    - uint8_t m_number
+    - GPIO_DIRECTION m_direction
+
+    - int8_t exportGPIO()
+    - int8_t unexportGPIO()
+    - int8_t write(std::string path, std::string file, std::string value)
+    - std::string read(std::string path, std::string file)
+}
+
+class I2CDevice
+{
+    + I2CDevice(uint8_t bus, uint8_t address)
+    + \~I2CDevice()
+
+    + uint8_t write(uint8_t regAddress, const uint8_t value)
+    + uint8_t write(uint8_t regAddress, const uint8_t values[], uint32_t len)
+    + uint8_t read(uint8_t regAddress)
+    + uint8_t read(uint8_t regAddress, uint8_t outValues[], uint32_t len)
+
+..
+    - int m_fd
+    - uint8_t m_bus
+    - uint8_t m_address
+
+    - uint8_t open()
+    - uint8_t close()
+}
+
+class Relay
+{
+    + {static} constexpr uint32_t MAX_CH_COUNT = 16
+
+    + Relay(GPIO *channelPins[], uint32_t channelCount)
+    + \~Relay() = default
+
+    + int setState(uint32_t channel, GPIO_STATE)
+    + int toggleState(uint32_t channel)
+    + GPIO_STATE getState(uint32_t channel)
+
+..
+    - GPIO *m_channelPins[MAX_CH_COUNT]
+    - uint32_t m_channelCount
+}
+
+class BME280
+{
+    + BME280(uint8_t bus = 1, uint8_t i2cAddress = BME280_I2C_ADDR_PRIM)
+    + \~BME280() = default
+
+    + int8_t refresh()
+    + int8_t updateSettings()
+
+    + double getTemperature()
+    + double getPressure()
+    + double getHumidity()
+
+    + int8_t setSensorMode(uint8_t mode)
+    + void setTempOversampling(uint8_t oversampling)
+    + void setPressOversampling(uint8_t oversampling)
+    + void setHumOversampling(uint8_t oversampling)
+    + void setFilter(uint8_t coefficient)
+
+..
+    - I2CDevice m_i2c
+    - struct bme280_dev m_bme280
+    - double m_temperature
+    - double m_pressure
+    - double m_humidity
+}
+
+/'
+'This is actually a struct, not a class, hence the different icon
+class bme280_dev << (S, lightblue) >>
+{
+
+}
+'/
+
+hide GPIO_DIRECTION methods
+hide GPIO_STATE methods
+
+@enduml
+
