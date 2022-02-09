@@ -13,6 +13,8 @@ int bme280Test()
 {
     BME280 bme280;
 
+    bme280.setSensorMode(BME280_FORCED_MODE);
+
     bme280.refresh();
 
     std::cout << "Temp: " << bme280.getTemperature() << "\n"
@@ -27,6 +29,13 @@ int bme280Test()
     bme280.updateSettings();
 
     bme280.setSensorMode(BME280_FORCED_MODE);
+
+    bme280.refresh();
+
+    std::cout << "Temp: " << bme280.getTemperature() << "\n"
+              << "Press: " << bme280.getPressure() << "\n"
+              << "Hum: " << bme280.getHumidity() << "\n"
+              << std::endl;
 
     return 0;
 }

@@ -32,6 +32,17 @@ BME280::BME280(uint8_t bus, uint8_t i2cAddress) :
     m_bme280.delay_us = bme280_userDelay;
 
     bme280_init(&m_bme280);
+
+    setTempOversampling(BME280_OVERSAMPLING_1X);
+    setHumOversampling(BME280_OVERSAMPLING_1X);
+    setPressOversampling(BME280_OVERSAMPLING_1X);
+    setFilter(BME280_FILTER_COEFF_OFF);
+    updateSettings();
+}
+
+BME280::~BME280()
+{
+    bme280_soft_reset(&m_bme280);
 }
 
 int8_t BME280::refresh()
@@ -71,7 +82,12 @@ double BME280::getHumidity()
 
 int8_t BME280::setSensorMode(uint8_t mode)
 {
-    return bme280_set_sensor_mode(mode, &m_bme280);
+    uint32_t reqDelay = bme280_cal_meas_delay(&m_bme280.settings) * 1000; // [ms] to [us]
+    int8_t res = bme280_set_sensor_mode(mode, &m_bme280);
+    
+    m_bme280.delay_us(reqDelay, m_bme280.intf_ptr);
+
+    return res;
 }
 
 void BME280::setTempOversampling(uint8_t oversampling)

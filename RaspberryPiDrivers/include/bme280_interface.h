@@ -15,7 +15,7 @@ class BME280
 {
 public:
     BME280(uint8_t bus = 1, uint8_t i2cAddress = BME280_I2C_ADDR_PRIM);
-    ~BME280() = default;
+    ~BME280();
 
     int8_t refresh();
     int8_t updateSettings();
