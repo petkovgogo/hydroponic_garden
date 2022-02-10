@@ -31,7 +31,7 @@ private:
 
     std::string m_path;
     uint8_t m_number;
-    GPIO_DIRECTION m_direction;
+    uint8_t m_initFlag;
 
     int8_t exportGPIO();
     int8_t unexportGPIO();
