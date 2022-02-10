@@ -9,7 +9,7 @@ constexpr uint8_t LED_Y_PIN = PIN_LED;
 constexpr uint8_t TDS_SENSOR_PIN = PIN_A2;
 constexpr uint8_t PH_SENSOR_PIN = PIN_A3;
 
- Xiao_SlaveCmd command;
+Xiao_SlaveCmd command;
 
 void slaveReceive(int);
 void slaveRespond();
@@ -19,6 +19,7 @@ AnalogSensor ph(PH_SENSOR_PIN, CompensationFuncs::compensatePHData);
 
 void setup()
 {
+    analogReadResolution(12);
     pinMode(LED_Y_PIN, OUTPUT);
 
     digitalWrite(LED_Y_PIN, LOW);
@@ -32,7 +33,9 @@ void setup()
 
 void loop()
 {
-    delay(1000);
+    delay(3950);
+    ph.refresh();
+    tds.refresh();
 }
 
 void slaveReceive(int)
@@ -55,6 +58,7 @@ void slaveReceive(int)
 
 void slaveRespond()
 {
+    float meas = 0.0;
     uint16_t data = 0;
 
     switch (command)
@@ -64,7 +68,8 @@ void slaveRespond()
         break;
 
     case READ_PH:
-        data = ph.getMeasurement(); // implicit casting - float value not needed, data is in range 0 to 14
+        meas = ph.getMeasurement();
+        data = meas * 100; // implicit casting
         break;
 
     default:
