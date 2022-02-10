@@ -15,7 +15,7 @@ public:
     float getMeasurement();
 
 private:
-    static constexpr uint32_t SAMPLE_BUFFER_SIZE = 50;
+    static constexpr uint32_t SAMPLE_BUFFER_SIZE = 15;
 
     uint32_t m_bufferSum;
     uint16_t m_samplesBuffer[SAMPLE_BUFFER_SIZE];
