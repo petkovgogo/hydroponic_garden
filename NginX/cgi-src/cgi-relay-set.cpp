@@ -38,9 +38,9 @@ int main()
 
     std::cout << "Content-Type: application/json\n\n";
     std::cout << "{\n";
-    std::cout << "    \"ch1:\" \"" << relay.getState(1) << "\"\n";
-    std::cout << "    \"ch2:\" \"" << relay.getState(2) << "\"\n";
-    std::cout << "    \"ch3:\" \"" << relay.getState(3) << "\"\n";
+    std::cout << "    \"ch1\": \"" << relay.getState(1) << "\",\n";
+    std::cout << "    \"ch2\": \"" << relay.getState(2) << "\",\n";
+    std::cout << "    \"ch3\": \"" << relay.getState(3) << "\"\n";
     std::cout << "}" << std::endl;
 
     return 0;

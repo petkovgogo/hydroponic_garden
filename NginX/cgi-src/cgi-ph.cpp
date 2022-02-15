@@ -15,7 +15,7 @@ int main()
 
     std::cout << "Content-Type: application/json\n\n";
     std::cout << "{\n";
-    std::cout << "    \"ph:\" \"" << phVal << "\"\n";
+    std::cout << "    \"ph\": \"" << phVal << "\"\n";
     std::cout << "}" << std::endl;
 
     return 0;

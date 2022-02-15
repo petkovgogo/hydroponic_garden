@@ -14,7 +14,7 @@ int main()
 
     std::cout << "Content-Type: application/json\n\n";
     std::cout << "{\n";
-    std::cout << "    \"tds:\" \"" << res << "\"\n";
+    std::cout << "    \"tds\": \"" << res << "\"\n";
     std::cout << "}" << std::endl;
 
     return 0;

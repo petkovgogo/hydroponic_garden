@@ -11,7 +11,7 @@ int main()
 
     std::cout << "Content-Type: application/json\n\n";
     std::cout << "{\n";
-    std::cout << "    \"state:\" \"" << liquidLevel.getState() << "\"\n";
+    std::cout << "    \"state\": \"" << liquidLevel.getState() << "\"\n";
     std::cout << "}" << std::endl;
 
     return 0;
