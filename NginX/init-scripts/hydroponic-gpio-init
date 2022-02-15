@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo 17 > /sys/class/gpio/export # relay channel 1
+echo 27 > /sys/class/gpio/export # relay channel 2
+echo 22 > /sys/class/gpio/export # relay channel 3
+echo 23 > /sys/class/gpio/export # liquid level
+
+echo out > /sys/class/gpio/gpio17/direction # relay channel 1
+echo out > /sys/class/gpio/gpio27/direction # relay channel 2
+echo out > /sys/class/gpio/gpio22/direction # relay channel 3
+echo in > /sys/class/gpio/gpio23/direction  # liquid level
