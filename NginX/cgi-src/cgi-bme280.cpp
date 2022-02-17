@@ -17,9 +17,9 @@ int main()
 
     std::cout << "Content-Type: application/json\n\n";
     std::cout << "{\n";
-    std::cout << "    \"temperature:\" \"" << bme280.getTemperature() << "\"\n";
-    std::cout << "    \"humidity:\" \"" << bme280.getHumidity() << "\"\n";
-    std::cout << "    \"pressure:\" \"" << bme280.getPressure() << "\"\n";
+    std::cout << "    \"temperature\": \"" << bme280.getTemperature() << "\",\n";
+    std::cout << "    \"humidity\": \"" << bme280.getHumidity() << "\",\n";
+    std::cout << "    \"pressure\": \"" << bme280.getPressure() << "\"\n";
     std::cout << "}" << std::endl;
 
     return 0;

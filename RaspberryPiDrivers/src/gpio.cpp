@@ -10,25 +10,38 @@
 #include <iostream>
 #include <fstream>
 #include <unistd.h>
+#include <fcntl.h>
 
 const std::string GPIO::GPIO_PATH = "/sys/class/gpio/";
 
-GPIO::GPIO(uint8_t number) : m_number(number), m_direction(INPUT)
+GPIO::GPIO(uint8_t number) : m_number(number), m_initFlag(0)
 {
+    int fd = 0;
     m_path = std::string(
         GPIO_PATH + "gpio" + std::to_string(static_cast<int>(m_number)) + "/");
 
-    exportGPIO();
+    if ((fd = ::open((m_path + "direction").c_str(), O_RDONLY)) < 0)
+    {
+        exportGPIO();
+    }
+    else
+    {
+        m_initFlag = 1;
+        ::close(fd);
+    }
 
     usleep(250000);
 }
 
 GPIO::~GPIO()
 {
-    unexportGPIO();
+    if (!m_initFlag)
+    {
+        unexportGPIO();
+    }
 }
 
-GPIO::GPIO(GPIO &gpio) : m_number(gpio.m_number), m_direction(gpio.m_direction)
+GPIO::GPIO(GPIO &gpio) : m_number(gpio.m_number)
 {
 }
 
