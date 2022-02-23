@@ -1,0 +1,20 @@
+@startuml LiquidLevelPollSeq
+
+control     "Timed Hosted Service" as tmhs
+participant NginX
+participant RaspberryPi            as rpi
+participant "Liquid level sensor"  as lls
+participant "Client mail"          as client_mail
+
+tmhs  --> NginX : HTTP GET request
+NginX --> rpi   : CGI for Liquid\nlevel sensor
+rpi   --> lls   : GPIO get state
+lls   --> rpi   : GPIO state
+rpi   --> NginX : Liquid level\nsensor state
+NginX --> tmhs  : JSON response
+
+alt State is HIGH
+    tmhs --> client_mail : Underflow warning
+end
+
+@enduml

@@ -1,0 +1,19 @@
+@startuml THPPollSeq
+
+control     "Timed Hosted Service" as tmhs
+participant NginX
+participant RaspberryPi as rpi
+participant BME280
+database    InfluxDB
+
+tmhs   --> NginX    : HTTP GET request
+NginX  --> rpi      : CGI for BME280
+rpi    --> BME280   : I2C request
+BME280 --> BME280   : Sampling
+BME280 --> rpi      : I2C response
+rpi    --> rpi      : Raw data processing
+rpi    --> NginX    : Compensated data
+NginX  --> tmhs     : JSON response
+tmhs   --> InfluxDB : Add sample
+
+@enduml
