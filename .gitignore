@@ -3,6 +3,8 @@
 .vscode
 build
 resource
+bin
+obj
 
 # Prerequisites
 *.d
