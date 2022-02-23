@@ -1,0 +1,37 @@
+version: '3'
+services:
+  rpi-sensor-data-db:
+    image: influxdb:alpine
+    ports:
+      - 8086:8086
+
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=georgi
+      - DOCKER_INFLUXDB_INIT_PASSWORD=314159265
+      - DOCKER_INFLUXDB_INIT_ORG=hydrop-project
+      - DOCKER_INFLUXDB_INIT_BUCKET=rpi-sensor-data
+
+    volumes:
+      - influxdb-data:/var/lib/influxdb2/
+
+  postgresql-db:
+    image: postgres:alpine
+    ports:
+      - 5432:5432
+
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+
+    volumes:
+      - postgres-data:/var/lib/postgresql/
+
+  data-gatherer-service:
+    image: data-gatherer:1.0
+
+volumes:
+  influxdb-data:
+    driver: local
+
+  postgres-data:
+    driver: local
