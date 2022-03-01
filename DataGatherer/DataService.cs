@@ -115,7 +115,7 @@ public class DataService
 
     private void SaveData(PointData data)
     {
-        using var client = InfluxDBClientFactory.Create("http://rpi-sensor-data-db", TOKEN);
+        using var client = InfluxDBClientFactory.Create("http://rpi-sensor-data-db:8086", TOKEN);
         using var writeApi = client.GetWriteApi();
 
         writeApi.WritePoint(BUCKET, ORG, data);
