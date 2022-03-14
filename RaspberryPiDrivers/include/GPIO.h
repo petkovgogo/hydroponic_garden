@@ -10,16 +10,29 @@
 
 #include <string>
 
+/** @name GPIO value defs */
 enum GPIO_DIRECTION { INPUT = 0, OUTPUT = 1 };
 enum GPIO_STATE { LOW = 0, HIGH = 1, UNDEF = 2 };
 
 class GPIO
 {
 public:
+    /** @name Path to gpio in sysfs */
     static const std::string GPIO_PATH;
 
+    /**
+     * @brief Initialize a new or refer to an already exported GPIO
+     * 
+     * @param[in] gpio : The GPIO pin number
+     * 
+     * @note This constructor accepts the GPIO bus number of the pin, not the physical one
+     */
     GPIO(uint8_t gpio);
-    GPIO(GPIO&);
+
+    /** @brief Copy-constructor */
+    GPIO(GPIO &);
+
+    /** @brief Unexport the pin, if exported by constructor, before destroying the object */
     ~GPIO();
 
     int setDirection(GPIO_DIRECTION);
