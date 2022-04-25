@@ -3,23 +3,29 @@ using InfluxDB.Client;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Writes;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
 
 public class DataService
 {
     private readonly IHttpClientFactory m_clientFactory;
-    const string TOKEN = "HoLZ-O3hgjsvNjA6zKiXu9Erny7hX2e5f_VcDmU-swGDMAWIH-duPgDOzVILLIWNlB8ZCzdH1e_fRDsMyB-v8g==";
-    const string BUCKET = "rpi-sensor-data";
-    const string ORG = "hydrop-project";
+    private readonly string BASE_URI;
+    private readonly string TOKEN;
+    private readonly string BUCKET;
+    private readonly string ORG;
 
-    public DataService(IHttpClientFactory clientFactory)
+    public DataService(IHttpClientFactory clientFactory, IConfiguration config)
     {
         m_clientFactory = clientFactory;
+        BASE_URI = config.GetValue<string>("RPiUri");
+        TOKEN = config.GetValue<string>("InfluxDB:Token");
+        BUCKET = config.GetValue<string>("InfluxDB:Bucket");
+        ORG = config.GetValue<string>("InfluxDB:Org");
     }
 
     public async Task GetData()
     {
         HttpClient client = m_clientFactory.CreateClient();
-        client.BaseAddress = new Uri("http://gmalinka.local/cgi-bin/");
+        client.BaseAddress = new Uri(BASE_URI);
 
         await PollBME280(client);
         await PollPH(client);
