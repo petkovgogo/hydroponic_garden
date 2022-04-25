@@ -4,17 +4,17 @@ control     "Timed Hosted Service" as tmhs
 participant NginX
 participant RaspberryPi as rpi
 participant Xiao
-participant "TDS sensor" as tds
+participant "Analog sensor" as ans
 database    InfluxDB
 
 loop indefinite
-    Xiao --> tds  : Analog read
-    tds  --> Xiao : Raw data
+    Xiao --> ans  : Analog read
+    ans  --> Xiao : Raw data
     Xiao --> Xiao : Raw data compensation\nand circular buffer update
 end
 
 tmhs  --> NginX : HTTP GET request
-NginX --> rpi   : CGI for TDS sensor
+NginX --> rpi   : CGI for given analog sensor
 
 group Interrupt
     rpi  --> Xiao : I2C request (command)

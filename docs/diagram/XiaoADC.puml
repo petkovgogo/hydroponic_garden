@@ -3,7 +3,7 @@
 class AnalogSensor
 class CompensationFuncs /'Aggregation of functions (namespace)'/
 
-AnalogSensor <|-- CompensationFuncs
+AnalogSensor *-- CompensationFuncs
 
 class AnalogSensor
 {

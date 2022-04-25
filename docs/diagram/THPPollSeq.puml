@@ -9,7 +9,7 @@ database    InfluxDB
 tmhs   --> NginX    : HTTP GET request
 NginX  --> rpi      : CGI for BME280
 rpi    --> BME280   : I2C request
-BME280 --> BME280   : Sampling
+BME280 --> BME280   : (Over)sampling
 BME280 --> rpi      : I2C response
 rpi    --> rpi      : Raw data processing
 rpi    --> NginX    : Compensated data

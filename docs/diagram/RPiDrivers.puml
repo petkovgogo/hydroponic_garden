@@ -8,8 +8,8 @@ class I2CDevice
 class Relay
 class BME280
 
-GPIO <|-- GPIO_DIRECTION
-GPIO <|-- GPIO_STATE
+GPIO <-- GPIO_DIRECTION
+GPIO <-- GPIO_STATE
 I2CDevice *-- GPIO
 Relay *-- GPIO
 BME280 *-- I2CDevice
