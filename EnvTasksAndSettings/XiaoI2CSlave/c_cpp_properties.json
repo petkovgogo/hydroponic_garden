@@ -1,0 +1,98 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "/home/pi/Documents/VSCode/Projects/HydroponicGarden/XiaoI2CSlave/include",
+                "/home/pi/Documents/VSCode/Projects/HydroponicGarden/XiaoI2CSlave/src",
+                "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/Wire",
+                "/home/pi/.platformio/packages/framework-cmsis/CMSIS/Core/Include",
+                "/home/pi/.platformio/packages/framework-cmsis-atmel/CMSIS/Device/ATMEL",
+                "/home/pi/.platformio/packages/framework-arduino-samd-seeed/cores/arduino",
+                "/home/pi/.platformio/packages/framework-arduino-samd-seeed/cores/arduino/TinyUSB",
+                "/home/pi/.platformio/packages/framework-arduino-samd-seeed/cores/arduino/TinyUSB/Adafruit_TinyUSB_ArduinoCore",
+                "/home/pi/.platformio/packages/framework-arduino-samd-seeed/cores/arduino/TinyUSB/Adafruit_TinyUSB_ArduinoCore/tinyusb/src",
+                "/home/pi/.platformio/packages/framework-cmsis/CMSIS/DSP/Include",
+                "/home/pi/.platformio/packages/framework-arduino-samd-seeed/variants/XIAO_m0",
+                "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/Adafruit_ZeroDMA",
+                "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/Adafruit_ZeroDMA/utility",
+                "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/EnergySaving/src",
+                "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/FlashStorage/src",
+                "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/HID",
+                "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/I2S/src",
+                "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/LoRaWan",
+                "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/SPI",
+                "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/Seeed_Arduino_FreeRTOS/src",
+                "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/Seeed_Arduino_LCD",
+                "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/SoftwareSerial",
+                "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/TimerTC3",
+                "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/TimerTCC0",
+                "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/USBHost/src",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "/home/pi/Documents/VSCode/Projects/HydroponicGarden/XiaoI2CSlave/include",
+                    "/home/pi/Documents/VSCode/Projects/HydroponicGarden/XiaoI2CSlave/src",
+                    "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/Wire",
+                    "/home/pi/.platformio/packages/framework-cmsis/CMSIS/Core/Include",
+                    "/home/pi/.platformio/packages/framework-cmsis-atmel/CMSIS/Device/ATMEL",
+                    "/home/pi/.platformio/packages/framework-arduino-samd-seeed/cores/arduino",
+                    "/home/pi/.platformio/packages/framework-arduino-samd-seeed/cores/arduino/TinyUSB",
+                    "/home/pi/.platformio/packages/framework-arduino-samd-seeed/cores/arduino/TinyUSB/Adafruit_TinyUSB_ArduinoCore",
+                    "/home/pi/.platformio/packages/framework-arduino-samd-seeed/cores/arduino/TinyUSB/Adafruit_TinyUSB_ArduinoCore/tinyusb/src",
+                    "/home/pi/.platformio/packages/framework-cmsis/CMSIS/DSP/Include",
+                    "/home/pi/.platformio/packages/framework-arduino-samd-seeed/variants/XIAO_m0",
+                    "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/Adafruit_ZeroDMA",
+                    "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/Adafruit_ZeroDMA/utility",
+                    "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/EnergySaving/src",
+                    "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/FlashStorage/src",
+                    "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/HID",
+                    "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/I2S/src",
+                    "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/LoRaWan",
+                    "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/SPI",
+                    "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/Seeed_Arduino_FreeRTOS/src",
+                    "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/Seeed_Arduino_LCD",
+                    "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/SoftwareSerial",
+                    "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/TimerTC3",
+                    "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/TimerTCC0",
+                    "/home/pi/.platformio/packages/framework-arduino-samd-seeed/libraries/USBHost/src",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=50205",
+                "ARDUINO_SAMD_ZERO",
+                "__SAMD21__",
+                "__SAMD21G18A__",
+                "ARM_MATH_CM0PLUS",
+                "SEEED_XIAO_M0",
+                "ARDUINO=10805",
+                "F_CPU=48000000L",
+                "USBCON",
+                "USB_VID=0x2886",
+                "USB_PID=0x802F",
+                "USB_PRODUCT=\"Seeeduino XIAO\"",
+                "USB_MANUFACTURER=\"Seeed\"",
+                "ARDUINO_ARCH_SAMD",
+                "USB_CONFIG_POWER=100",
+                ""
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "compilerPath": "/home/pi/.platformio/packages/toolchain-gccarmnoneeabi/bin/arm-none-eabi-gcc",
+            "compilerArgs": [
+                "-mcpu=cortex-m0plus",
+                "-mthumb",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}

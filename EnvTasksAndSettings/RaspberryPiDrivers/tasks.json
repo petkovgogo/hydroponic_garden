@@ -1,0 +1,43 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "rpi-build",
+            "type": "shell",
+            "command": "/usr/bin/arm-linux-gnueabihf-g++",
+            "args": [
+                "-g",
+                "-Wall",
+                "-I${workspaceFolder}/include",
+                "${workspaceFolder}/src/*.cpp",
+                "${workspaceFolder}/src/*.c",
+                "${workspaceFolder}/test/*.cpp",
+                "-o",
+                "${workspaceFolder}/build/RPiController"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "rpi-link-shared-lib",
+            "type": "shell",
+            "command": "/usr/bin/arm-linux-gnueabihf-g++",
+            "args": [
+                "-Wall",
+                "-fPIC",
+                "-I${workspaceFolder}/include",
+                "${workspaceFolder}/src/*.cpp",
+                "${workspaceFolder}/src/*.c",
+                "-shared",
+                "-o",
+                "${workspaceFolder}/build/librpiDrivers.so"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ]
+        }
+    ]
+}

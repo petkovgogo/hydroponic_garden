@@ -1,0 +1,29 @@
+{
+    "configurations": [
+        {
+            "name": "NginX",
+            "includePath": [
+                "/home/pi/Documents/VSCode/Projects/HydroponicGarden/NginX/rpi-include",
+                "/home/pi/Documents/VSCode/Projects/HydroponicGarden/NginX/xiao-include",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "/home/pi/Documents/VSCode/Projects/HydroponicGarden/NginX/rpi-include",
+                    "/home/pi/Documents/VSCode/Projects/HydroponicGarden/NginX/xiao-include",
+                    ""
+                ]
+            },
+            "defines": [
+                ""
+            ],
+            "compilerPath": "/usr/bin/arm-linux-gnueabihf-g++",
+            "compilerArgs": [
+                ""
+            ],
+            "intelliSenseMode": "linux-gcc-arm"
+        }
+    ],
+    "version": 4
+}

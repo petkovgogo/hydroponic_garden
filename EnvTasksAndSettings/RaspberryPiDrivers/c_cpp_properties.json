@@ -1,0 +1,31 @@
+{
+    "configurations": [
+        {
+            "name": "RaspberryPi",
+            "includePath": [
+                "/home/pi/Documents/VSCode/Projects/HydroponicGarden/RaspberryPiDrivers/include",
+                "/home/pi/Documents/VSCode/Projects/HydroponicGarden/RaspberryPiDrivers/src",
+                "/home/pi/Documents/VSCode/Projects/HydroponicGarden/RaspberryPiDrivers/test",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "/home/pi/Documents/VSCode/Projects/HydroponicGarden/RaspberryPiDrivers/include",
+                    "/home/pi/Documents/VSCode/Projects/HydroponicGarden/RaspberryPiDrivers/src",
+                    "/home/pi/Documents/VSCode/Projects/HydroponicGarden/RaspberryPiDrivers/test",
+                    ""
+                ]
+            },
+            "defines": [
+                ""
+            ],
+            "compilerPath": "/usr/bin/arm-linux-gnueabihf-g++",
+            "compilerArgs": [
+                ""
+            ],
+            "intelliSenseMode": "linux-gcc-arm"
+        }
+    ],
+    "version": 4
+}
