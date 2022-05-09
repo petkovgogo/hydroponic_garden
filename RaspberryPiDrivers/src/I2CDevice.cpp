@@ -53,19 +53,6 @@ uint8_t I2CDevice::close()
     return 0;
 }
 
-uint8_t I2CDevice::write(const uint8_t value)
-{
-    uint8_t buffer[] = {value};
-
-    if (::write(m_fd, buffer, 1) != 1)
-    {
-        perror("I2C: Failed write to the device\n");
-        return 1;
-    }
-
-    return 0;
-}
-
 uint8_t I2CDevice::write(uint8_t regAddress, const uint8_t value)
 {
     uint8_t buffer[] = {regAddress, value};

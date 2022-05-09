@@ -1,0 +1,28 @@
+@startuml TDSPollSeq
+
+control     "Timed Hosted Service" as tmhs
+participant NginX
+participant RaspberryPi as rpi
+participant Xiao
+participant "Analog sensor" as ans
+database    InfluxDB
+
+loop indefinite
+    Xiao --> ans  : Analog read
+    ans  --> Xiao : Raw data
+    Xiao --> Xiao : Raw data compensation\nand circular buffer update
+end
+
+tmhs  --> NginX : HTTP GET request
+NginX --> rpi   : CGI for given analog sensor
+
+group Interrupt
+    rpi  --> Xiao : I2C request (command)
+    Xiao --> rpi  : I2C response\n(mean compensated data)
+end
+
+rpi   --> NginX    : Sensor data
+NginX --> tmhs     : JSON response
+tmhs  --> InfluxDB : Add sample
+
+@enduml

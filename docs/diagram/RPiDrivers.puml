@@ -8,8 +8,8 @@ class I2CDevice
 class Relay
 class BME280
 
-GPIO <|-- GPIO_DIRECTION
-GPIO <|-- GPIO_STATE
+GPIO <-- GPIO_DIRECTION
+GPIO <-- GPIO_STATE
 I2CDevice *-- GPIO
 Relay *-- GPIO
 BME280 *-- I2CDevice
@@ -93,12 +93,12 @@ class BME280
 
     + int8_t refresh()
     + int8_t updateSettings()
+    + int8_t setSensorMode(uint8_t mode)
 
     + double getTemperature()
     + double getPressure()
     + double getHumidity()
 
-    + int8_t setSensorMode(uint8_t mode)
     + void setTempOversampling(uint8_t oversampling)
     + void setPressOversampling(uint8_t oversampling)
     + void setHumOversampling(uint8_t oversampling)

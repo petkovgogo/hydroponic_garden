@@ -18,6 +18,7 @@ frame "RaspberryPi" \
     OFF_WEB_SERVER(NginX, "[ NginX ]\n**gmalinka.local**\nCGI scripts")
     OFF_NIC(Xiao, "[ Xiao ]\n**I2C**\nADC + compensation")
     OFF_SERVICE_APPLICATION(BME280, "[ BME280 ]\n**I2C**\nT + H + P sensor")
+    OFF_SERVICE_APPLICATION(LiquidLevel, "[ LiquidLevel ]\n**GPIO**")
     OFF_SERVICE_APPLICATION(Relay, "[ Relay ]\n**GPIO**")
 }
 
@@ -41,6 +42,7 @@ frame "Client" \
 
 NginX <--> Xiao
 NginX <--> BME280
+NginX <--> LiquidLevel
 NginX <--> Relay
 SensorDataGatherer <--> NginX
 SensorDataGatherer --> InfluxDB

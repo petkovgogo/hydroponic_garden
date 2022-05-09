@@ -1,0 +1,55 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "cgicc-build",
+            "type": "shell",
+            "command": "/usr/bin/arm-linux-gnueabihf-g++",
+            "args": [
+                "-Wall",
+                "${workspaceFolder}/cgi-src/${fileBasename}",
+                "-I${workspaceFolder}/rpi-include",
+                "-I${workspaceFolder}/xiao-include",
+                "-L${workspaceFolder}/resources/",
+                "-lrpiDrivers",
+                "-lcgicc",
+                "-o",
+                "${workspaceFolder}/build/${fileBasenameNoExtension}.cgi"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "cgi-build",
+            "type": "shell",
+            "command": "/usr/bin/arm-linux-gnueabihf-g++",
+            "args": [
+                "-g",
+                "-Wall",
+                "${workspaceFolder}/cgi-src/${fileBasename}",
+                "-I${workspaceFolder}/rpi-include",
+                "-I${workspaceFolder}/xiao-include",
+                "-L${workspaceFolder}/resources/",
+                "-lrpiDrivers",
+                "-o",
+                "${workspaceFolder}/build/${fileBasenameNoExtension}.cgi"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "cgi-export",
+            "type": "shell",
+            "command": "scp",
+            "args": [
+                "${workspaceFolder}/build/${fileBasenameNoExtension}.cgi",
+                "root@gmalinka.local:/usr/lib/cgi-bin/"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}
