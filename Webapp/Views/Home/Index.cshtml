@@ -1,0 +1,83 @@
+﻿@model Webapp.Models.SensorData
+
+@{
+  ViewData["Title"] = "Dashboard";
+}
+
+<head>
+  <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+</head>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">
+          <i class="far fa-chart-bar"></i>
+          Current measurements
+        </h3>
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="row">
+          
+          <!-- Temperature -->
+          <div class="col-6 col-md-3 text-center">
+            <div class="gauge">
+              <input type="text" class="knob scale" value="100" data-skin="tron" data-thickness="0.2"
+                data-anglearc="250" data-angleoffset="-125" data-width="120" data-height="120" data-fgcolor="#00c0ef"
+                readonly="true" />
+            </div>
+            <div class="knob-label"></div>
+          </div>
+
+          <!-- Humidity -->
+          <div class="col-6 col-md-3 text-center">
+            <div class="gauge">
+              <input type="text" class="knob scale" value="100" data-skin="tron" data-thickness="0.2"
+                data-anglearc="250" data-angleoffset="-125" data-width="120" data-height="120" data-fgcolor="#00c0ef"
+                readonly="true" />
+            </div>
+            <div class="knob-label"></div>
+          </div>
+
+          <!-- Pressure -->
+          <div class="col-6 col-md-3 text-center">
+            <div class="gauge">
+              <input type="text" class="knob scale" value="1000" data-skin="tron" data-thickness="0.2"
+                data-anglearc="250" data-angleoffset="-125" data-width="120" data-height="120" data-fgcolor="#00c0ef"
+                readonly="true" />
+            </div>
+            <div class="knob-label"></div>
+          </div>
+
+          <!-- PH -->
+          <div class="col-6 col-md-3 text-center">
+            <div class="gauge">
+              <input type="text" class="knob scale" value="14" data-skin="tron" data-thickness="0.2"
+                data-anglearc="250" data-angleoffset="-125" data-width="120" data-height="120" data-fgcolor="#00c0ef"
+                readonly="true" />
+            </div>
+            <div class="knob-label"></div>
+          </div>
+
+          <!-- TDS -->
+          <div class="col-6 col-md-3 text-center">
+            <div class="gauge">
+              <input type="text" class="knob scale" value="1000" data-skin="tron" data-thickness="0.2"
+                data-anglearc="250" data-angleoffset="-125" data-width="120" data-height="120" data-fgcolor="#00c0ef"
+                readonly="true" />
+            </div>
+            <div class="knob-label"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

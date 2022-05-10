@@ -3,11 +3,12 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <UserSecretsId>852a49b7-2dc2-49b7-baac-61d54e5fa4fd</UserSecretsId>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="InfluxDB.Client" Version="3.3.0" />
+    <PackageReference Include="InfluxDB.Client" Version="4.1.0" />
   </ItemGroup>
 
 </Project>

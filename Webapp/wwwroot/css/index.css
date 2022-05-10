@@ -1,0 +1,21 @@
+.gauge {
+    display: inline;
+    width: 120px;
+    height: 120px;
+}
+
+.scale {
+    width: 64px;
+    height: 40px;
+    position: absolute;
+    vertical-align: middle;
+    margin-top: 40px;
+    margin-left: -92px;
+    border: 0px;
+    background: none;
+    font: bold 24px Arial;
+    text-align: center;
+    color: rgb(0, 192, 239);
+    padding: 0px;
+    appearance: none;
+}
