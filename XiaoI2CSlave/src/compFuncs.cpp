@@ -27,5 +27,5 @@ float CompensationFuncs::compensatePHData(uint16_t rawValue)
 
     float averageVoltage = rawValue * ADC_COEF;
 
-    return averageVoltage * PH_COEF + OFFSET;
+    return (VREF - averageVoltage) * PH_COEF + OFFSET;
 }
