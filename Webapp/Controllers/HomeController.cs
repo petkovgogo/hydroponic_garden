@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Webapp.Models;
 using Webapp.Services;
+using InfluxDB.Client.Core.Flux.Domain;
 
 namespace Webapp.Controllers;
 
@@ -12,33 +13,38 @@ public class HomeController : Controller
     private readonly string _bucket;
     private readonly string _org;
 
-    public HomeController(IConfiguration config, ILogger<HomeController> logger)
+    private readonly InfluxDBService _influxService;
+
+    public HomeController(
+        IConfiguration config, 
+        ILogger<HomeController> logger,
+        InfluxDBService influxService)
     {
         _logger = logger;
         _bucket = config.GetValue<string>("InfluxDB:Bucket");
         _org = config.GetValue<string>("InfluxDB:Org");
+        _influxService = influxService;
     }
 
-    public async Task<IActionResult> Index([FromServices] InfluxDBService service)
+    public async Task<IActionResult> Index()
     {
-        var results = await service.QueryAsync(async query =>
+        var result = await _influxService.QueryAsync(async query =>
         {
-            var flux = $"from(bucket:\"{_bucket}\") |> range(start: -1m)";
+            var flux = $"from(bucket:\"{_bucket}\") |> range(start: -15m)";
             var tables = await query.QueryAsync(flux, _org);
+            
 
-            return tables.SelectMany(table =>
-                table.Records.Select(record =>
-                    new SensorData
-                    {
-                        Temperature = decimal.Parse(record.GetValue().ToString()),
-                        Humidity = int.Parse(record.GetValue().ToString()),
-                        Pressure = int.Parse(record.GetValue().ToString()),
-                        PH = int.Parse(record.GetValue().ToString()),
-                        TDS = int.Parse(record.GetValue().ToString()),
-                    }));
+            return new SensorData
+            {
+                Temperature = GetMeasurement(tables, "temperature"),
+                Humidity = GetMeasurement(tables, "humidity"),
+                Pressure = GetMeasurement(tables, "pressure"),
+                PH = GetMeasurement(tables, "ph"),
+                TDS = (int)GetMeasurement(tables, "tds")
+            };
         });
 
-        return View(results[0]);
+        return View(result);
     }
 
     public IActionResult Privacy()
@@ -50,5 +56,23 @@ public class HomeController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+    private double GetMeasurement(List<FluxTable> tables, string measurement)
+    {
+        var measurementTable = tables
+                .Where(t => t.Records
+                    .Any(r => r.GetValueByKey("_field") as string == measurement))
+                .FirstOrDefault();
+        double measurementValue = 0D;
+
+        if (measurementTable != null)
+	    {
+            measurementValue = Math.Round(measurementTable.Records
+            .Select(r => r.GetValue() as double?)
+            .Average() ?? 0D, 2);
+	    }
+
+        return measurementValue;
     }
 }

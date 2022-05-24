@@ -1,7 +1,12 @@
 ﻿@model Webapp.Models.SensorData
+@using System.Globalization
 
 @{
   ViewData["Title"] = "Dashboard";
+  string humidity = Model.Humidity.ToString("F2", CultureInfo.InvariantCulture);
+  string temperature = Model.Temperature.ToString("F2", CultureInfo.InvariantCulture);
+  string pressure = Model.Pressure.ToString("F2", CultureInfo.InvariantCulture);
+  string pH = Model.PH.ToString("F2", CultureInfo.InvariantCulture);
 }
 
 <head>
@@ -9,7 +14,7 @@
 </head>
 
 <div class="row">
-  <div class="col-12">
+  <div class="col-sm-12">
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">
@@ -24,56 +29,50 @@
       </div>
 
       <div class="card-body">
-        <div class="row">
-          
+        <div class="row justify-content-center">
           <!-- Temperature -->
-          <div class="col-6 col-md-3 text-center">
-            <div class="gauge">
-              <input type="text" class="knob scale" value="100" data-skin="tron" data-thickness="0.2"
-                data-anglearc="250" data-angleoffset="-125" data-width="120" data-height="120" data-fgcolor="#00c0ef"
-                readonly="true" />
+          <div class="col-sm-12 col-md-2 text-center">
+            <input type="text" class="knob" value="@temperature" data-skin="tron" data-fgcolor="#00c0ef" data-min="-40"
+              data-max="60" />
+            <div class="knob-label">
+              @Html.DisplayNameFor(model => model.Temperature)
             </div>
-            <div class="knob-label"></div>
           </div>
 
           <!-- Humidity -->
-          <div class="col-6 col-md-3 text-center">
-            <div class="gauge">
-              <input type="text" class="knob scale" value="100" data-skin="tron" data-thickness="0.2"
-                data-anglearc="250" data-angleoffset="-125" data-width="120" data-height="120" data-fgcolor="#00c0ef"
-                readonly="true" />
+          <div class="col-sm-12 col-md-2 text-center">
+            <input type="text" class="knob" value="@humidity" data-skin="tron" data-fgcolor="#005ce6" data-min="0"
+              data-max="100" />
+            <div class="knob-label">
+              @Html.DisplayNameFor(model => model.Humidity)
             </div>
-            <div class="knob-label"></div>
           </div>
 
           <!-- Pressure -->
-          <div class="col-6 col-md-3 text-center">
-            <div class="gauge">
-              <input type="text" class="knob scale" value="1000" data-skin="tron" data-thickness="0.2"
-                data-anglearc="250" data-angleoffset="-125" data-width="120" data-height="120" data-fgcolor="#00c0ef"
-                readonly="true" />
+          <div class="col-sm-12 col-md-2 text-center">
+            <input type="text" class="knob" value="@pressure" data-skin="tron" data-fgcolor="#d69302" data-min="0"
+              data-max="1200" />
+            <div class="knob-label">
+              @Html.DisplayNameFor(model => model.Pressure)
             </div>
-            <div class="knob-label"></div>
           </div>
 
           <!-- PH -->
-          <div class="col-6 col-md-3 text-center">
-            <div class="gauge">
-              <input type="text" class="knob scale" value="14" data-skin="tron" data-thickness="0.2"
-                data-anglearc="250" data-angleoffset="-125" data-width="120" data-height="120" data-fgcolor="#00c0ef"
-                readonly="true" />
+          <div class="col-sm-12 col-md-2 text-center">
+            <input type="text" class="knob" value="@pH" data-skin="tron" data-fgcolor="#4a08ff" data-min="0"
+              data-max="14" />
+            <div class="knob-label">
+              @Html.DisplayNameFor(model => model.PH)
             </div>
-            <div class="knob-label"></div>
           </div>
 
           <!-- TDS -->
-          <div class="col-6 col-md-3 text-center">
-            <div class="gauge">
-              <input type="text" class="knob scale" value="1000" data-skin="tron" data-thickness="0.2"
-                data-anglearc="250" data-angleoffset="-125" data-width="120" data-height="120" data-fgcolor="#00c0ef"
-                readonly="true" />
+          <div class="col-sm-12 col-md-2 text-center">
+            <input type="text" class="knob" value="@Model.TDS" data-skin="tron" data-fgcolor="#99cc00" data-min="0"
+              data-max="1300" />
+            <div class="knob-label">
+              @Html.DisplayNameFor(model => model.TDS)
             </div>
-            <div class="knob-label"></div>
           </div>
 
         </div>
@@ -81,3 +80,168 @@
     </div>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">
+          <i class="fas fa-cog"></i>
+          Device control
+        </h3>
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row justify-content-center">
+
+          <div class="col-sm-12 col-md-2 text-center">
+            <div id="water-pump-card" data-channel="ch1" class="card img-fluid" style="width:100%">
+              <img class="card-img-top" src="~/img/waterpump.png" alt="Card image" style="width:100%">
+              <div class="card-img-overlay">
+                <h4 class="card-title">Water pump</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-2 text-center">
+            <div id="air-pump-card" data-channel="ch2" class="card img-fluid" style="width:100%">
+              <img class="card-img-top" src="~/img/airpump.png" alt="Card image" style="width:100%">
+              <div class="card-img-overlay">
+                <h4 class="card-title">Air pump</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-2 text-center">
+            <div id="lamp-card" data-channel="ch3" class="card img-fluid" style="width:100%">
+              <img class="card-img-top" src="~/img/light.png" alt="Card image" style="width:100%">
+              <div class="card-img-overlay">
+                <h4 class="card-title">Lamp</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section Scripts
+{
+  <script>
+    $(function(){
+      $.get('http://gmalinka.local/cgi-bin/cgi-relay-response.cgi')
+      .done(function(data){
+        setState(data);
+      });
+
+      $('#lamp-card').on('click', toggleState);
+      $('#air-pump-card').on('click', toggleState);
+      $('#water-pump-card').on('click', toggleState);
+    });
+
+    var setState = function(data) {
+      if(data.ch1 === "0"){
+        $('#water-pump-card').addClass('state-off');
+        $('#water-pump-card').removeClass('state-on');
+      } else {
+        $('#water-pump-card').removeClass('state-off');
+        $('#water-pump-card').addClass('state-on');
+      }
+
+      if(data.ch2 === "0"){
+        $('#air-pump-card').addClass('state-off');
+        $('#air-pump-card').removeClass('state-on');
+      } else {
+        $('#air-pump-card').removeClass('state-off');
+        $('#air-pump-card').addClass('state-on');
+      }
+
+      if(data.ch3 === "0"){
+        $('#lamp-card').addClass('state-off');
+        $('#lamp-card').removeClass('state-on');
+      } else {
+        $('#lamp-card').removeClass('state-off');
+        $('#lamp-card').addClass('state-on');
+      }
+    }
+
+    var toggleState = function(e) {
+      e.stopPropagation();
+      var element = $(e.target).parent('div.card');
+      var newState = element.hasClass('state-on') ? "0" : "1"; 
+      var channel = element.data('channel');
+      $.post('http://gmalinka.local/cgi-bin/cgi-relay-set.cgi?' + channel + '=' + newState)
+        .done(function(data){
+          setState(data);
+        });
+    }
+  </script>
+
+  <script>
+    $('.knob').knob({
+      /*change : function (value) {
+       //console.log("change : " + value);
+       },
+       release : function (value) {
+       console.log("release : " + value);
+       },
+       cancel : function () {
+       console.log("cancel : " + this.value);
+       },*/
+      width: "100%",
+      //height: "100%",
+      step: 0.01,
+      thickness: 0.2,
+      angleArc: "250",
+      angleOffset: "-125",
+      readOnly: true,
+      draw: function () {
+
+        // "tron" case
+        if (this.$.data('skin') == 'tron') {
+          var a = this.angle(this.cv),  // Angle
+            sa = this.startAngle,       // Previous start angle
+            sat = this.startAngle,      // Start angle
+            ea,                         // Previous end angle
+            eat = sat + a,              // End angle
+            r = true
+
+          this.g.lineWidth = this.lineWidth
+
+          this.o.cursor
+            && (sat = eat - 0.3)
+            && (eat = eat + 0.3)
+
+          if (this.o.displayPrevious) {
+            ea = this.startAngle + this.angle(this.value)
+            this.o.cursor
+              && (sa = ea - 0.3)
+              && (ea = ea + 0.3)
+            this.g.beginPath()
+            this.g.strokeStyle = this.previousColor
+            this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sa, ea, false)
+            this.g.stroke()
+          }
+
+          this.g.beginPath()
+          this.g.strokeStyle = r ? this.o.fgColor : this.fgColor
+          this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sat, eat, false)
+          this.g.stroke()
+
+          this.g.lineWidth = 2
+          this.g.beginPath()
+          this.g.strokeStyle = this.o.fgColor
+          this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false)
+          this.g.stroke()
+
+          return false
+        }
+      }
+    })
+  </script>
+}

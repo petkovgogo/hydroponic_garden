@@ -1,10 +1,21 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Webapp.Models;
 
 class SensorData
 {
-    public decimal Temperature { get; init; }
-    public int Humidity { get; init; }
-    public int Pressure { get; init; }
-    public int PH { get; init; }
+    [Display(Name = "Temperature [°C]")]
+    public double Temperature { get; init; }
+
+    [Display(Name = "Humidity [%]")]
+    public double Humidity { get; init; }
+
+    [Display(Name = "Pressure [hPa]")]
+    public double Pressure { get; init; }
+
+    [Display(Name = "Acidity/Basity [pH]")]
+    public double PH { get; init; }
+
+    [Display(Name = "TDS [ppm]")]
     public int TDS { get; init; }
 }

@@ -1,7 +1,5 @@
-.gauge {
-    display: inline;
-    width: 120px;
-    height: 120px;
+.knob {
+    font-size: 24px !important;
 }
 
 .scale {
@@ -18,4 +16,14 @@
     color: rgb(0, 192, 239);
     padding: 0px;
     appearance: none;
+}
+
+.state-on {
+    background-color: #ddf2eb;
+    cursor: pointer;
+}
+
+.state-off {
+    background-color: #fdecec;
+    cursor: pointer;
 }
