@@ -6,10 +6,16 @@
 #include "XiaoDefs.h"
 
 constexpr uint8_t LED_Y_PIN = PIN_LED;
-constexpr uint8_t TDS_SENSOR_PIN = PIN_A2;
-constexpr uint8_t PH_SENSOR_PIN = PIN_A3;
+constexpr uint8_t TDS_SENSOR_PIN = PIN_A1;
+constexpr uint8_t PH_SENSOR_PIN = PIN_A2;
 
 Xiao_SlaveCmd command;
+
+#ifdef DEBUG
+
+int cnt = 1;
+
+#endif
 
 void slaveReceive(int);
 void slaveRespond();
@@ -29,6 +35,12 @@ void setup()
     Wire.begin(XIAO_I2C_ADDR);
     Wire.onReceive(slaveReceive);
     Wire.onRequest(slaveRespond);
+
+#ifdef DEBUG
+
+    Serial.begin(9600);
+
+#endif
 }
 
 void loop()
@@ -36,6 +48,20 @@ void loop()
     delay(3950);
     ph.refresh();
     tds.refresh();
+
+#ifdef DEBUG
+
+    Serial.print(cnt++);
+    Serial.print(": ");
+    Serial.println(ph.getMeasurement());
+
+    if (cnt > 15)
+    {
+        cnt = 0;
+        Serial.println();
+    }
+
+#endif
 }
 
 void slaveReceive(int)
@@ -69,7 +95,7 @@ void slaveRespond()
 
     case READ_PH:
         meas = ph.getMeasurement();
-        data = meas * 100; // implicit casting
+        data = meas * 100;
         break;
 
     default:
