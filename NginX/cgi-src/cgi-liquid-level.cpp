@@ -4,7 +4,7 @@
 
 int main()
 {
-    constexpr uint8_t SENSOR_PIN = 4;
+    constexpr uint8_t SENSOR_PIN = 23;
 
     GPIO liquidLevel(SENSOR_PIN);
     liquidLevel.setDirection(GPIO_DIRECTION::INPUT);
