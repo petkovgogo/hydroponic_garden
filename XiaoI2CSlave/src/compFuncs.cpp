@@ -22,9 +22,10 @@ float CompensationFuncs::compensateTDSData(uint16_t rawValue)
 
 float CompensationFuncs::compensatePHData(uint16_t rawValue)
 {
+    constexpr float OFFSET = 0.12;
     constexpr float PH_COEF = 14.0 / VREF;
 
     float averageVoltage = rawValue * ADC_COEF;
 
-    return (VREF - averageVoltage) * PH_COEF;
+    return averageVoltage * PH_COEF + OFFSET;
 }
