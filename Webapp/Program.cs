@@ -1,9 +1,10 @@
+using Webapp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-// builder.Services.Configure<KestrelServerOptions>(Configuration.GetSection("Kestrel"));
+builder.Services.AddSingleton<InfluxDBService>();
 
 var app = builder.Build();
 

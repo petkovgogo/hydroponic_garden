@@ -30,15 +30,15 @@ public class HomeController : Controller
                 table.Records.Select(record =>
                     new SensorData
                     {
-                        Temperature = decimal.Parse(record.GetValue().ToString()),
-                        Humidity = int.Parse(record.GetValue().ToString()),
-                        Pressure = int.Parse(record.GetValue().ToString()),
-                        PH = int.Parse(record.GetValue().ToString()),
-                        TDS = int.Parse(record.GetValue().ToString()),
+                        Temperature = decimal.Parse(record.GetValue().ToString()) ?? 0M,
+                        Humidity = int.Parse(record.GetValue().ToString()) ?? 0,
+                        Pressure = int.Parse(record.GetValue().ToString()) ?? 0,
+                        PH = int.Parse(record.GetValue().ToString()) ?? 0,
+                        TDS = int.Parse(record.GetValue().ToString()) ?? 0,
                     }));
         });
 
-        return View(results[0]);
+        return View(results.FirstOrDefault());
     }
 
     public IActionResult Privacy()

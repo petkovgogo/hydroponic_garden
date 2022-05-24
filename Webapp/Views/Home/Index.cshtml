@@ -25,55 +25,65 @@
 
       <div class="card-body">
         <div class="row">
-          
+          <div class="col-6 col-md-1 text-center"></div>
           <!-- Temperature -->
-          <div class="col-6 col-md-3 text-center">
+          <div class="col-6 col-md-2 text-center">
             <div class="gauge">
-              <input type="text" class="knob scale" value="100" data-skin="tron" data-thickness="0.2"
-                data-anglearc="250" data-angleoffset="-125" data-width="120" data-height="120" data-fgcolor="#00c0ef"
-                readonly="true" />
+              <input type="text" class="knob scale" value="23" data-skin="tron" data-thickness="0.2" data-anglearc="250"
+                data-angleoffset="-125" data-width="145" data-height="145" data-fgcolor="#00c0ef" data-min="-40"
+                data-max="60" readonly="true" />
             </div>
-            <div class="knob-label"></div>
+            <div class="knob-label">
+              @Html.DisplayNameFor(model => model.Temperature)
+            </div>
           </div>
 
           <!-- Humidity -->
-          <div class="col-6 col-md-3 text-center">
+          <div class="col-6 col-md-2 text-center">
             <div class="gauge">
               <input type="text" class="knob scale" value="100" data-skin="tron" data-thickness="0.2"
-                data-anglearc="250" data-angleoffset="-125" data-width="120" data-height="120" data-fgcolor="#00c0ef"
-                readonly="true" />
+                data-anglearc="250" data-angleoffset="-125" data-width="145" data-height="145" data-fgcolor="#005ce6"
+                data-min="0" data-max="100" readonly="true" />
             </div>
-            <div class="knob-label"></div>
+            <div class="knob-label">
+              @Html.DisplayNameFor(model => model.Humidity)
+            </div>
           </div>
 
           <!-- Pressure -->
-          <div class="col-6 col-md-3 text-center">
+          <div class="col-6 col-md-2 text-center">
             <div class="gauge">
-              <input type="text" class="knob scale" value="1000" data-skin="tron" data-thickness="0.2"
-                data-anglearc="250" data-angleoffset="-125" data-width="120" data-height="120" data-fgcolor="#00c0ef"
-                readonly="true" />
+              <input type="text" class="knob scale" value="1013" data-skin="tron" data-thickness="0.2"
+                data-anglearc="250" data-angleoffset="-125" data-width="145" data-height="145" data-fgcolor="#d69302"
+                data-min="0" data-max="1200" readonly="true" />
             </div>
-            <div class="knob-label"></div>
+            <div class="knob-label">
+              @Html.DisplayNameFor(model => model.Pressure)
+            </div>
           </div>
 
           <!-- PH -->
-          <div class="col-6 col-md-3 text-center">
+          <div class="col-6 col-md-2 text-center">
             <div class="gauge">
-              <input type="text" class="knob scale" value="14" data-skin="tron" data-thickness="0.2"
-                data-anglearc="250" data-angleoffset="-125" data-width="120" data-height="120" data-fgcolor="#00c0ef"
-                readonly="true" />
+              <input type="text" class="knob scale" value="7" data-skin="tron" data-thickness="0.2" data-anglearc="250"
+                data-angleoffset="-125" data-width="145" data-height="145" data-fgcolor="#4a08ff" data-min="0"
+                data-max="14" readonly="true" />
             </div>
-            <div class="knob-label"></div>
+            <div class="knob-label">
+              @Html.DisplayNameFor(model => model.PH)
+            </div>
           </div>
 
           <!-- TDS -->
-          <div class="col-6 col-md-3 text-center">
+          <div class="col-6 col-md-2 text-center">
             <div class="gauge">
               <input type="text" class="knob scale" value="1000" data-skin="tron" data-thickness="0.2"
-                data-anglearc="250" data-angleoffset="-125" data-width="120" data-height="120" data-fgcolor="#00c0ef"
-                readonly="true" />
+                data-anglearc="250" data-angleoffset="-125" data-width="145" data-height="145" data-fgcolor="#99cc00"
+                data-min="0" data-max="1000" readonly="true" />
             </div>
-            <div class="knob-label"></div>
+            <div class="knob-label">
+              @Html.DisplayNameFor(model => model.TDS)
+            </div>
           </div>
 
         </div>
