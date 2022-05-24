@@ -36,6 +36,7 @@ int main()
         relay.setState(3, stoi(**it_CH3) ? GPIO_STATE::HIGH : GPIO_STATE::LOW);
     }
 
+    std::cout << "Access-Control-Allow-Origin: *\n";
     std::cout << "Content-Type: application/json\n\n";
     std::cout << "{\n";
     std::cout << "    \"ch1\": \"" << relay.getState(1) << "\",\n";
