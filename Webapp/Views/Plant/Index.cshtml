@@ -1,3 +1,67 @@
+@model IEnumerable<PlantListVM>
 @{
     ViewData["Title"] = "Plant specifications";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Available plants</h3>
+        <div class="card-tools">
+            <a asp-area="" asp-controller="Plant" asp-action="Add" class="btn btn-outline-success btn-sm" >
+                Add <i class="fas fa-plus"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <table id="pspecs" class="table table-bordered table-striped">
+            <thead>
+                <td>Name</td>
+                <td>Temperature</td>
+                <td>Humidity</td>
+                <td>pH</td>
+                <td>TDS</td>
+                <td>Planted</td>
+                <td>Actions</td>
+            </thead>
+            <tbody>
+                @foreach (PlantListVM item in @Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Temperature</td>
+                        <td>@item.Humidity</td>
+                        <td>@item.PH</td>
+                        <td>@item.Tds</td>
+                        <td>@item.Planted</td>
+                        <td class="text-center">
+                            <a asp-area="" asp-controller="Plant" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">Edit <i class="fas fa-pen"></i></a>
+                            <a asp-area="" asp-controller="Plant" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Delete <i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@section Head
+{
+<link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+}
+
+@section Scripts
+{
+<partial name="_DataTablesScriptsPartial.cshtml" />
+<script>
+    $(function () {
+        $("#pspecs").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false
+        });
+    });
+</script>
 }

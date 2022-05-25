@@ -134,7 +134,7 @@
 {
   <script>
     $(function(){
-      $.get('http://gmalinka.local/cgi-bin/cgi-relay-response.cgi')
+      $.get('Home/GetStatus')
       .done(function(data){
         setState(data);
       });
@@ -145,6 +145,7 @@
     });
 
     var setState = function(data) {
+      debugger;
       if(data.ch1 === "0"){
         $('#water-pump-card').addClass('state-off');
         $('#water-pump-card').removeClass('state-on');
@@ -175,11 +176,17 @@
       var element = $(e.target).parent('div.card');
       var newState = element.hasClass('state-on') ? "0" : "1"; 
       var channel = element.data('channel');
-      $.post('http://gmalinka.local/cgi-bin/cgi-relay-set.cgi?' + channel + '=' + newState)
+
+      var dt = {
+        'channel': channel,
+        'newState': newState 
+      };
+      
+      $.post('/Home/SetStatus', dt)
         .done(function(data){
           setState(data);
         });
-    }
+      }
   </script>
 
   <script>

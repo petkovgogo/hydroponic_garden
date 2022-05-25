@@ -1,0 +1,54 @@
+@model PlantVM
+
+<div class="row">
+    <div class="col-md-12">
+        <form action="@Url.Action("Edit")" method="post">
+            @Html.HiddenFor(x => x.Id)
+
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-12">@Html.EditorFor(x => x.Name)</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">@Html.EditorFor(x => x.Notes)</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">@Html.EditorFor(x => x.MinTemperature, "NullableDouble")</div>
+                        <div class="col-6">@Html.EditorFor(x => x.MaxTemperature, "NullableDouble")</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">@Html.EditorFor(x => x.MinHumidity, "NullableDouble")</div>
+                        <div class="col-6">@Html.EditorFor(x => x.MaxHumidity, "NullableDouble")</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">@Html.EditorFor(x => x.MinPh, "NullableDouble")</div>
+                        <div class="col-6">@Html.EditorFor(x => x.MaxPh, "NullableDouble")</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">@Html.EditorFor(x => x.MinTds, "Int32Nullable")</div>
+                        <div class="col-6">@Html.EditorFor(x => x.MaxTds, "Int32Nullable")</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">@Html.EditorFor(x => x.IsPlanted, "Toggle")</div>
+                        <div class="col-6">@Html.EditorFor(x => x.IsActive, "Toggle")</div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-12">
+                    <input type="submit" class="btn btn-outline-success" value="Save" />
+                    <a asp-controller="Plant" asp-action="Index" class="btn btn-outline-danger">Back</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+<partial name="_ValidationScriptsPartial.cshtml" />
+}
